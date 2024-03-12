@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
         title: Text('Title'),
       ),
       drawer: NavDrawer(), // Drawer
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
