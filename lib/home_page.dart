@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20), // Provides spacing between text and image
             CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/profile.jpg'),
+              backgroundImage: AssetImage('assets/Fire.png'),
             ),
             SizedBox(height: 20),
             Text(

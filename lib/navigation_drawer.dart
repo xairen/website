@@ -14,7 +14,7 @@ class NavDrawer extends StatelessWidget {
             accountEmail: Text('abhinavsrini8@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
-                child: Image.asset('assets/profile.jpg',
+                child: Image.asset('assets/Fire.png',
                     width: 90, height: 90, fit: BoxFit.cover),
               ),
             ),
@@ -22,7 +22,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.blue,
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage('assets/drawer_header_background.png'),
+                image: AssetImage('assets/header.jpeg'),
               ),
             ),
           ),
@@ -42,6 +42,11 @@ class NavDrawer extends StatelessWidget {
             title: Text('Gaming Interests'),
             onTap: () =>
                 Navigator.of(context).pushReplacementNamed('/interests'),
+          ),
+          ListTile(
+            leading: Icon(Icons.document_scanner),
+            title: Text('Resume'),
+            onTap: () => Navigator.of(context).pushReplacementNamed('/resume'),
           ),
           // Add more list tiles for other pages
         ],
