@@ -1,40 +1,49 @@
 import 'package:flutter/material.dart';
 import 'navigation_drawer.dart';
+import 'widgets/experience_timeline.dart';
+import 'widgets/project_card.dart';
 
 class ResumePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Dummy data for demonstration. Replace with your actual data.
+    final List<Map<String, String>> experiences = [
+      {
+        'title': 'SOFTWARE ENGINEER | Center on Access Technology',
+        'period': 'December 2023 - Present',
+        'description': 'Led the development of a robust PWA prototype...',
+      },
+      // Add more experiences as needed
+    ];
+
+    final List<Map<String, String>> projects = [
+      {
+        'name': 'MACHINE LEARNING-BASED PREDICTION OF NATURAL DISASTERS',
+        'period': 'May 2023 – Aug 2023',
+        'description': 'Developed a robust machine-learning model...',
+      },
+      // Add more projects as needed
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Resume'),
       ),
-      drawer: NavDrawer(),
+      drawer: NavDrawer(), // Assuming you have a navigation drawer setup
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('EDUCATION',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            Text('Rochester Institute of Technology | Rochester, NY\n'
-                'MS in Information Technology and Analytics\n'
-                'August 2020 - August 2023'),
-            SizedBox(height: 4),
-            Text('SRM University | Chennai, India\n'
-                'B.Tech in Information Technology\n'
-                'August 2016 - May 2020'),
-            SizedBox(height: 16),
-            Text('TECHNICAL SKILLS',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            Text('Languages: Python, Java, Dart, SAS'),
-            Text(
-                'AWS: CloudFormation, DynamoDB, Lambda, IAM, S3, SNS/SQS, RDS, VPC'),
-            Text('Web Technologies: HTML, CSS, Javascript, PHP, XML, Django'),
-            Text('Database: MySQL, PostgreSQL, MongoDB, Neo4J'),
-            Text('Tools: Docker, Github, Jenkins, Asana, UIFlow'),
-            SizedBox(height: 16),
+            // Add your Education, Technical Skills, etc., sections here
+            Text('Experience',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            ExperienceTimeline(experiences: experiences),
+            Text('Projects',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            ...projects
+                .map((project) => ProjectCard(project: project))
+                .toList(),
           ],
         ),
       ),
