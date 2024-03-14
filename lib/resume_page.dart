@@ -13,15 +13,40 @@ class ResumePage extends StatelessWidget {
         'period': 'December 2023 - Present',
         'description': 'Led the development of a robust PWA prototype...',
       },
-      // Add more experiences as needed
+      {
+        'title': 'SOFTWARE ENGINEER | Center on Access Technology',
+        'period': 'August 2022 - August 2023',
+        'description': '.....',
+      },
+      {
+        'title':
+            'RESEARCH/TEACHING ASSISTANT | Rochester Institute of Technology',
+        'period': 'May 2021 - May 2022',
+        'description': '.....',
+      },
+      {
+        'title': 'WEB DEVELOPER | Rochester Institute of Technology',
+        'period': 'September 2021 - December 2021',
+        'description': '.....',
+      }
     ];
 
     final List<Map<String, String>> projects = [
       {
         'name': 'MACHINE LEARNING-BASED PREDICTION OF NATURAL DISASTERS',
-        'period': 'May 2023 – Aug 2023',
+        'period': 'May 2023 - Aug 2023',
         'description': 'Developed a robust machine-learning model...',
       },
+      {
+        'name': 'MACHINE LEARNING-BASED PREDICTION OF NATURAL DISASTERS',
+        'period': 'May 2023 - Aug 2023',
+        'description': 'Developed a robust machine-learning model...',
+      },
+      {
+        'name': 'MACHINE LEARNING-BASED PREDICTION OF NATURAL DISASTERS',
+        'period': 'May 2023 - Aug 2023',
+        'description': 'Developed a robust machine-learning model...',
+      }
       // Add more projects as needed
     ];
 

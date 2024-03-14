@@ -21,16 +21,19 @@ class _StockPicksPageState extends State<StockPicksPage> {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> json = jsonDecode(response.body);
-      final Map<String, dynamic> timeSeries = json['Time Series (Daily)'];
-      List<FlSpot> spots = [];
-      int index = 0;
-      timeSeries.forEach((date, data) {
+      final json = jsonDecode(response.body);
+      final timeSeries = json['Time Series (Daily)'] as Map<String, dynamic>;
+
+      //Converting list to entries to sort by date
+      final entries = timeSeries.entries.toList()
+        ..sort((a, b) => a.key.compareTo(b.key));
+
+      List<FlSpot> spots = List.generate(entries.length, (index) {
+        final Map<String, dynamic> data = entries[index].value;
         final double closePrice = double.parse(data['4. close']);
-        spots.add(FlSpot(index.toDouble(), closePrice));
-        index++;
+        return FlSpot(index.toDouble(), closePrice);
       });
-      return spots.reversed.toList(); // Reverse to ensure chronological order
+      return spots; // Reverse to ensure chronological order
     } else {
       throw Exception('Failed to load stock data');
     }
@@ -39,8 +42,10 @@ class _StockPicksPageState extends State<StockPicksPage> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, String>> stocks = [
-      {'symbol': 'AAPL', 'name': 'Apple Inc.'},
-      {'symbol': 'GOOGL', 'name': 'Google Inc.'},
+      {'symbol': 'AAPL', 'name': 'Apple'},
+      {'symbol': 'GOOGL', 'name': 'Google'},
+      {'symbol': 'MSFT', 'name': 'Microsoft'},
+      {'symbol': 'COST', 'name': 'Costco'},
     ];
 
     return Scaffold(
@@ -111,7 +116,7 @@ class _StockPicksPageState extends State<StockPicksPage> {
                                       return '\$${value.toInt()}';
                                     },
                                     reservedSize:
-                                        28, // Adjust as needed for label spacing
+                                        35, // Adjust as needed for label spacing
                                   ),
                                   topTitles: SideTitles(
                                       showTitles:
