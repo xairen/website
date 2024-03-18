@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'navigation_drawer.dart'; // Ensure this path is correct for your project structure
 
@@ -53,10 +57,22 @@ class InterestsPage extends StatelessWidget {
     },
     {
       'title': 'One Piece',
-      'rating': 4,
+      'rating': 5,
+    },
+    {
+      'title': 'Oregairu',
+      'rating': 4.75,
     },
     // Add more animes as needed
   ];
+
+  final Map<String, dynamic> fplTeamData = {
+    "id": 4504170,
+    "player_first_name": "Abhinav",
+    "player_last_name": "Srinivasan",
+    "summary_overall_points": 1546,
+    "summary_overall_rank": 2863496,
+  };
 
   Widget buildAnimeList(BuildContext context) {
     return ListView.builder(
@@ -162,6 +178,25 @@ class InterestsPage extends StatelessWidget {
               Text('Top Anime List',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
               buildAnimeList(context),
+              SizedBox(height: 20),
+              Text('Top Anime List',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              buildAnimeList(context),
+
+              // FPL Team Info section
+              SizedBox(height: 20),
+              Text('My FPL Team Info',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              ListTile(
+                title: Text(
+                    "Player: ${fplTeamData['player_first_name']} ${fplTeamData['player_last_name']}",
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                subtitle: Text(
+                    "Overall Points: ${fplTeamData['summary_overall_points']}\nOverall Rank: ${fplTeamData['summary_overall_rank']}",
+                    style: TextStyle(fontSize: 14)),
+              ),
+              // Add more details as needed based on your JSON data
             ],
           ),
         ),
