@@ -76,18 +76,16 @@ class InterestsPage extends StatelessWidget {
 
   Widget buildAnimeList(BuildContext context) {
     return ListView.builder(
-      physics:
-          NeverScrollableScrollPhysics(), // Disables scrolling within the ListView
-      shrinkWrap:
-          true, // Allows ListView to take minimum required vertical space
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       itemCount: animes.length,
       itemBuilder: (context, index) {
         final anime = animes[index];
         return ListTile(
           leading: CircleAvatar(
             backgroundColor: Colors.blue,
-            child: Text(anime['title']
-                [0]), // Display the first letter of the anime title
+            child:
+                Text(anime['title'][0], style: TextStyle(color: Colors.white)),
           ),
           title: Text(anime['title'],
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
@@ -119,6 +117,7 @@ class InterestsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Games section
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text('Games I\'m Playing',
@@ -126,7 +125,7 @@ class InterestsPage extends StatelessWidget {
                         TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
               ),
               Container(
-                height: 240, // Adjust based on your content or preference
+                height: 269,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: games.length,
@@ -134,30 +133,29 @@ class InterestsPage extends StatelessWidget {
                     final game = games[index];
                     return Card(
                       elevation: 4,
-                      margin: const EdgeInsets.only(right: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset(
                             game['imagePath'],
-                            width: 200, // Fixed width for each card
-                            height: 200, // Fixed height for the image
+                            width: 200,
+                            height: 200,
                             fit: BoxFit.cover,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            padding: const EdgeInsets.all(8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Played', // The subtitle saying "played"
+                                  game['name'],
                                   style: TextStyle(
-                                      fontSize: 14, color: Colors.grey),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.access_time,
-                                        size: 14), // Small clock icon
+                                    Icon(Icons.timer, size: 14),
                                     SizedBox(width: 4),
                                     Text(
                                       '${game['hoursPlayed']} hours',
@@ -174,29 +172,52 @@ class InterestsPage extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 20),
-              Text('Top Anime List',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-              buildAnimeList(context),
+
+              // Anime list section
               SizedBox(height: 20),
               Text('Top Anime List',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
               buildAnimeList(context),
 
               // FPL Team Info section
-              SizedBox(height: 20),
+              SizedBox(
+                height: 20,
+                width: 50,
+              ),
               Text('My FPL Team Info',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-              ListTile(
-                title: Text(
-                    "Player: ${fplTeamData['player_first_name']} ${fplTeamData['player_last_name']}",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                subtitle: Text(
-                    "Overall Points: ${fplTeamData['summary_overall_points']}\nOverall Rank: ${fplTeamData['summary_overall_rank']}",
-                    style: TextStyle(fontSize: 14)),
+              Card(
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(Icons.person, size: 50),
+                        title: Text(
+                            "${fplTeamData['player_first_name']} ${fplTeamData['player_last_name']}",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        subtitle: Text("Fantasy Premier League"),
+                      ),
+                      Divider(),
+                      ListTile(
+                        leading: Icon(Icons.leaderboard),
+                        title: Text("Overall Points"),
+                        trailing:
+                            Text("${fplTeamData['summary_overall_points']}"),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.assessment),
+                        title: Text("Overall Rank"),
+                        trailing:
+                            Text("#${fplTeamData['summary_overall_rank']}"),
+                      ),
+                      // Add more details as desired...
+                    ],
+                  ),
+                ),
               ),
-              // Add more details as needed based on your JSON data
             ],
           ),
         ),
