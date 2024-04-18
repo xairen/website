@@ -1,3 +1,3 @@
-# website
+# DART Website
 
-A new Flutter project.
+Personal website that displays resume and interest using DART
